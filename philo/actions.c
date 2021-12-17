@@ -6,25 +6,30 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 14:59:44 by vvermot-          #+#    #+#             */
-/*   Updated: 2021/12/16 15:13:17 by vvermot-         ###   ########.fr       */
+/*   Updated: 2021/12/17 17:47:34 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_eat(t_time *time)
+// Chaque philosopheur devrait carry son time de dernier meal
+
+void	ft_eat(t_thread *thread)
 {
-	usleep(time->time_to_eat);
-	ft_sleep(time);
+	pthread_mutex_lock(&thread->fork);
+	usleep(thread->times->time_to_eat);
+	pthread_mutex_unlock(&thread->fork);
+	ft_sleep(thread);
 }
 
-void	ft_sleep(t_time *time)
+void	ft_sleep(t_thread *thread)
 {
-	usleep(time->time_to_sleep);
-	ft_think(time);
+	usleep(thread->times->time_to_sleep);
+	ft_think(thread);
 }
 
-void	ft_think(t_time *time)
+void	ft_think(t_thread *thread)
 {
-	(void)time;
+	(void)thread;
+	//ft_eat(thread);
 }

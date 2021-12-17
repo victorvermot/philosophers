@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:14:01 by vvermot-          #+#    #+#             */
-/*   Updated: 2021/12/16 15:05:57 by vvermot-         ###   ########.fr       */
+/*   Updated: 2021/12/17 17:45:14 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,43 @@ void	args_check(t_time *time, char **argv)
 
 void	*ft_test(void *arg)
 {
-	t_time	*time;
+	t_thread	*threads;
 
-	time = arg;
-	printf("I run at this micro_seconds : %d\n", time->time_to_die);
+	threads = arg;
+	ft_eat(threads);
+	printf("I run at this micro_seconds : %d\n", threads->times->time_to_die);
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	struct timeval	c_time;
-	pthread_t		*new_thread;
-	t_time			times;
+	t_thread		threads;
 	int				i;
 	int				len;
 
-	new_thread = NULL;
-	len = ft_atoi(argv[1]);
-	i = 0;
 	if (argc == 4 || argc == 5)
 	{
-		new_thread = malloc(sizeof(pthread_t) * len);
-		args_check(&times, argv);
-		gettimeofday(&c_time, NULL);
+		len = ft_atoi(argv[1]);
+		i = 0;
+		threads.new_thread = malloc(sizeof(pthread_t) * len);
+		args_check(threads.times, argv);
+		//gettimeofday(&c_time, NULL);
+		if (pthread_mutex_init(&threads.fork, NULL) != 0)
+		{
+			free(threads.new_thread);
+			return (0);
+		}
 		while (i < len)
-			pthread_create(&new_thread[i++], NULL, ft_test, &times);
+			if (pthread_create(&threads.new_thread[i++], NULL, ft_test, &threads) != 0)
+			{
+				free(threads.new_thread);
+				return (0);
+			}
 		i = 0;
 		while (i < len)
-			pthread_join(new_thread[i++], NULL);
+			pthread_join(threads.new_thread[i++], NULL);
 		//printf("seconds: %ld\n%d", c_time.tv_sec, c_time.tv_usec);
+		pthread_mutex_destroy(&threads.fork);
 	}
 	return (0);
 }
