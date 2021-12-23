@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2021/12/17 18:08:42 by vvermot-         ###   ########.fr       */
+/*   Updated: 2021/12/23 12:59:19 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,25 @@ typedef struct s_time{
 	int	time_to_sleep;
 }	t_time;
 
+typedef struct s_philo{
+	int	id;
+	int	last_meal;
+	int	left_fork;
+	int	right_fork;
+}	t_philo;
+
 typedef struct s_thread{
 	pthread_t		*new_thread;
-	pthread_mutex_t	fork;
+	pthread_mutex_t	*fork;
 	t_time			*times;
-	int				*last_meal;
+	t_philo			*philo;
 }	t_thread;
 
 int		ft_atoi(const char *str);
 void	ft_eat(t_thread *thread);
 void	ft_sleep(t_thread *thread);
 void	ft_think(t_thread *thread);
+int		ft_allocate(t_thread *thread, int len, char **argv);
+void	ft_free(t_thread *thread, int opt);
 
 #endif
