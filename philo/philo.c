@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:14:01 by vvermot-          #+#    #+#             */
-/*   Updated: 2021/12/23 17:01:45 by vvermot-         ###   ########.fr       */
+/*   Updated: 2021/12/30 12:43:57 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 static void	*ft_test(void *arg)
 {
-	t_philo		*philo;
+	t_philo			*philo;
 	pthread_mutex_t	id_update;
 	static int		i;
 
-	i = 0;
-	philo = arg;
-
-	printf("Here is my id : %d\n", philo->id);
-	i++;
-	printf("%d\n", i);
-	// threads->philo->id = id++;
 	// ft_eat(threads);
 	pthread_mutex_lock(&id_update);
-	philo->id = i + 1;
+	i = 0;
+	philo = arg;
+	// printf("%d\n", i);
+	philo->id = i++;
+	// printf("Here is my id : %d\n", philo->id);
 	pthread_mutex_unlock(&id_update);
 	return (0);
 }
@@ -59,7 +56,10 @@ int	main(int argc, char **argv)
 	}
 	i = 0;
 	while (i < len)
+	{
+		printf(RED"%d"WHITE, threads.philo[i].id);
 		pthread_join(threads.new_thread[i++], NULL);
+	}
 	//printf("seconds: %ld\n%d", c_time.tv_sec, c_time.tv_usec);
 	pthread_mutex_destroy(threads.fork);
 	return (0);

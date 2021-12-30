@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2021/12/23 12:59:19 by vvermot-         ###   ########.fr       */
+/*   Updated: 2021/12/30 12:43:54 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 # define EAT 1
 # define THINK 2
 # define SLEEP 3
+# define RED "\033[0;31m"
+# define GREEN "\033[0;33m"
+# define WHITE "\033[0m"
 
 typedef struct s_time{
 	int	time_to_die;
