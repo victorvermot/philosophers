@@ -1,5 +1,5 @@
+SRCS = ${addprefix srcs/, philo.c philo_utils.c init.c threads.c}
 NAME = philo
-SRCS = philo.c philo_utils.c actions.c init.c
 OBJS = ${SRCS:.c=.o}
 FLGS = -Wall -Wextra -Werror
 GCC = gcc -g -O0
