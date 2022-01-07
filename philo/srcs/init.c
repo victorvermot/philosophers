@@ -6,11 +6,11 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:35:37 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/06 17:34:08 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:30:13 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	ft_args_check(t_info *info, char **argv, int opt)
 {
@@ -25,6 +25,7 @@ int	ft_args_check(t_info *info, char **argv, int opt)
 	if (!info->time_to_die || !info->time_to_eat || !info->time_to_sleep
 		|| !info->time_to_win)
 		return (0);
+	info->is_printed = 0;
 	return (1);
 }
 
@@ -58,6 +59,7 @@ static int	add_values(int len, t_philo **philo, t_info *info)
 		(*philo)[i].is_dead = 0;
 		(*philo)[i].head = &(*philo)[0];
 		(*philo)[i].meal_count = 0;
+		(*philo)[i].done_eating = 0;
 	}
 	return (1);
 }

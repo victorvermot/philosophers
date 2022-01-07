@@ -6,11 +6,11 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:14:01 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/06 12:12:04 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/07 10:36:29 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	main(int argc, char **argv)
 {

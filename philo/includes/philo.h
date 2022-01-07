@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/06 17:33:52 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/07 12:29:58 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_info{
 	int	time_to_sleep;
 	int	time_to_win;
 	int	philo_num;
+	int	is_printed;
 }	t_info;
 
 typedef struct s_philo{
@@ -47,10 +48,10 @@ typedef struct s_philo{
 	int				last_meal;
 	int				is_dead;
 	int				meal_count;
+	int				done_eating;
 	struct s_philo	*right_philo;
 	struct s_philo	*head;
 	struct timeval	c_time;
-	pthread_mutex_t	id_mutex;
 	pthread_mutex_t	fork;
 	t_info			*infos;
 }	t_philo;
