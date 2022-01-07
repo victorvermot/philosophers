@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:35:37 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/05 18:15:18 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:34:08 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ static int	add_values(int len, t_philo **philo, t_info *info)
 		else
 			(*philo)[i].right_philo = &(*philo)[0];
 		(*philo)[i].infos = info;
+		(*philo)[i].is_dead = 0;
+		(*philo)[i].head = &(*philo)[0];
+		(*philo)[i].meal_count = 0;
 	}
 	return (1);
 }

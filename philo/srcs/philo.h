@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/05 18:15:17 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:33:52 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define EAT 1
 # define THINK 2
 # define SLEEP 3
+# define DEATH 4
 # define RED "\033[0;31m"
 # define YELLOW "\033[0;33m"
 # define GREEN "\033[0;32m"
@@ -45,7 +46,9 @@ typedef struct s_philo{
 	int				id;
 	int				last_meal;
 	int				is_dead;
+	int				meal_count;
 	struct s_philo	*right_philo;
+	struct s_philo	*head;
 	struct timeval	c_time;
 	pthread_mutex_t	id_mutex;
 	pthread_mutex_t	fork;

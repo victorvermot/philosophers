@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 10:34:34 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/04 16:05:20 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:30:48 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	ft_strlen(char *str)
 
 void	ft_write_msg(t_philo *philo, int opt)
 {
-	gettimeofday(&philo->c_time, NULL);
 	if (opt == FORK)
 	{
 		printf("%d "YELLOW"%d "PINK"has "RED"taken "L_BLUE"a "
@@ -34,16 +33,20 @@ void	ft_write_msg(t_philo *philo, int opt)
 	{
 		printf("%d "YELLOW"%d "PINK"is "RED"eating "L_BLUE
 			"\n"WHITE, philo->c_time.tv_usec, philo->id);
-		philo->last_meal = philo->c_time.tv_usec;
 	}
 	else if (opt == SLEEP)
 	{
-		printf("%d "YELLOW"%d "PINK"is "RED"sleeping "L_BLUE
+		printf("%d "YELLOW"%d "PINK"is "D_BLUE"sleeping "L_BLUE
 			"\n"WHITE, philo->c_time.tv_usec, philo->id);
 	}
 	else if (opt == THINK)
 	{
-		printf("%d "YELLOW"%d "PINK"is "RED"thinking "L_BLUE
+		printf("%d "YELLOW"%d "PINK"is "L_BLUE"thinking "L_BLUE
+			"\n"WHITE, philo->c_time.tv_usec, philo->id);
+	}
+	else if (opt == DEATH)
+	{
+		printf("%d "YELLOW"%d "RED"died "L_BLUE
 			"\n"WHITE, philo->c_time.tv_usec, philo->id);
 	}
 }
