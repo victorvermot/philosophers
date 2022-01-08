@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 14:28:33 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/07 12:48:03 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/07 15:30:27 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,13 @@ static int	ft_check_death(t_philo *philo)
 {
 	int	i;
 	int	count;
-	pthread_mutex_t	mutex_count;
+	// pthread_mutex_t	mutex_count;
 
 	count = 0;
 	i = -1;
-	if (pthread_mutex_init(&mutex_count, NULL) != 0
-		|| philo->infos->is_printed)
-		return (0);
-	pthread_mutex_lock(&mutex_count);
+	// if (pthread_mutex_init(&mutex_count, NULL) != 0
+	// 	|| philo->infos->is_printed)
+	// 	return (0);
 	while (++i < philo->infos->philo_num)
 	{
 		if (philo[i].is_dead)
@@ -34,14 +33,16 @@ static int	ft_check_death(t_philo *philo)
 		if (philo[i].done_eating)
 			count++;
 	}
+	pthread_mutex_lock(&philo->fork);
 	if (count == philo->infos->philo_num && !philo->infos->is_printed)
 	{
-		printf("Philosophers are done eating\n");
+		printf("le printed : %d\n", philo->infos->is_printed);
+		if (!philo->infos->is_printed)
+			printf("Philosophers are done eating\n");
 		philo->infos->is_printed = 1;
 		return (0);
 	}
-	pthread_mutex_unlock(&mutex_count);
-	pthread_mutex_destroy(&mutex_count);
+	pthread_mutex_unlock(&philo->fork);
 	return (1);
 }
 
@@ -73,6 +74,7 @@ void	ft_eat(t_philo *philo)
 	{
 		usleep(philo->infos->time_to_eat);
 		ft_write_msg(philo, EAT);
+		philo->meal_count += 1;
 		if (philo->infos->time_to_win)
 			ft_are_philo_hungry(philo);
 		gettimeofday(&philo->c_time, NULL);
@@ -82,13 +84,9 @@ void	ft_eat(t_philo *philo)
 		philo->is_dead = 1;
 	pthread_mutex_unlock(&philo->right_philo->fork);
 	pthread_mutex_unlock(&philo->fork);
-	// if (philo->infos->is_printed)
-	// 	return ;
 	ft_write_msg(philo, SLEEP);
 	usleep(philo->infos->time_to_sleep);
 	ft_write_msg(philo, THINK);
-	//printf("where we at%d\n", philo->c_time.tv_usec - philo->last_meal);
-	//if (philo->c_time.tv_usec - philo->last_meal < philo->infos->time_to_die)
 }
 
 static void	*ft_test(void *arg)
@@ -103,7 +101,7 @@ static void	*ft_test(void *arg)
 	//printf("%d\n", philo->infos->time_to_sleep);
 	gettimeofday(&philo->c_time, NULL);
 	philo->last_meal = philo->c_time.tv_usec;
-	while (ft_check_death(philo->head))
+	while (ft_check_death(philo->head) && !philo->infos->is_printed)
 		ft_eat(philo);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/07 12:29:58 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/07 13:03:41 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # include <sys/time.h>
 # include <stdlib.h>
 
-# define FORK 0
-# define EAT 1
-# define THINK 2
-# define SLEEP 3
-# define DEATH 4
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define THINK "is thinking"
+# define SLEEP "is sleeping"
+# define DEATH "died"
 # define RED "\033[0;31m"
 # define YELLOW "\033[0;33m"
 # define GREEN "\033[0;32m"
@@ -62,7 +62,7 @@ int		ft_args_check(t_info *info, char **argv, int opt);
 int		ft_allocate(t_philo **philo, pthread_t **new_thread,
 			t_info *info, int len);
 int		ft_free(t_philo *philo, pthread_t *new_thread, int opt);
-void	ft_write_msg(t_philo *philo, int opt);
+void	ft_write_msg(t_philo *philo, char *opt);
 int		ft_launch_thread(t_philo *philo, int len, pthread_t *new_thread);
 
 #endif
