@@ -31,8 +31,8 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!ft_allocate(&philo, &new_thread, &info, len))
 		return (0);
-	printf("%d\n", info.time_to_win);
 	if (!ft_launch_thread(philo, len, new_thread))
 		return (0);
+	ft_clean(philo, new_thread);
 	return (0);
 }

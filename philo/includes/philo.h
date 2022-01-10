@@ -41,23 +41,24 @@ typedef struct s_info{
 	int	time_to_win;
 	int	philo_num;
 	int	is_printed;
+	int	is_dead;
 }	t_info;
 
 typedef struct s_philo{
 	int				id;
-	int				last_meal;
-	int				is_dead;
+	size_t			last_meal;
 	int				meal_count;
 	int				done_eating;
 	struct s_philo	*right_philo;
 	struct s_philo	*head;
-	struct timeval	c_time;
 	pthread_mutex_t	fork;
 	t_info			*infos;
 }	t_philo;
 
 int		ft_atoi(const char *str);
 void	ft_eat(t_philo *philo);
+size_t	ft_get_time(void);
+void	ft_clean(t_philo *philo, pthread_t *new_thread);
 int		ft_args_check(t_info *info, char **argv, int opt);
 int		ft_allocate(t_philo **philo, pthread_t **new_thread,
 			t_info *info, int len);

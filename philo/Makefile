@@ -13,7 +13,7 @@ all:		${NAME}
 
 ${NAME}: 	${OBJS}
 			@echo "${CLR_GREEN}Objects created${CLR_RESET}"
-			${GCC} ${FLGS} -o $@ $^
+			${GCC} ${FLGS} -o $@ $^ -lpthread
 			@echo "${CLR_GREEN}Exe created${CLR_RESET}"
 
 clean:

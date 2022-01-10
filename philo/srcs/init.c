@@ -19,13 +19,17 @@ int	ft_args_check(t_info *info, char **argv, int opt)
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
 	if (opt == 1)
+	{
 		info->time_to_win = ft_atoi(argv[5]);
+		if (!info->time_to_win)
+			return (0);
+	}
 	else
 		info->time_to_win = 0;
-	if (!info->time_to_die || !info->time_to_eat || !info->time_to_sleep
-		|| !info->time_to_win)
+	if (!info->time_to_die || !info->time_to_eat || !info->time_to_sleep)
 		return (0);
 	info->is_printed = 0;
+	info->is_dead = 0;
 	return (1);
 }
 
@@ -41,22 +45,22 @@ int	ft_free(t_philo *philo, pthread_t *new_thread, int opt)
 	return (0);
 }
 
-static int	add_values(int len, t_philo **philo, t_info *info)
+static int	add_values(int len, t_philo **philo, pthread_t **new, t_info *info)
 {
 	int	i;
 
 	i = -1;
 	while (++i < len)
 	{
+		if (pthread_mutex_init(&(*philo)[i].fork, NULL) != 0)
+			return (ft_free(*philo, *new, 2));
 		(*philo)[i].id = i;
-		gettimeofday(&(*philo)[i].c_time, NULL);
-		(*philo)[i].last_meal = (*philo)[i].c_time.tv_usec;
+		(*philo)[i].last_meal = ft_get_time();
 		if (!(i + 1 == len))
 			(*philo)[i].right_philo = &(*philo)[i + 1];
 		else
 			(*philo)[i].right_philo = &(*philo)[0];
 		(*philo)[i].infos = info;
-		(*philo)[i].is_dead = 0;
 		(*philo)[i].head = &(*philo)[0];
 		(*philo)[i].meal_count = 0;
 		(*philo)[i].done_eating = 0;
@@ -75,7 +79,7 @@ int	ft_allocate(t_philo **philo, pthread_t **new_thread, t_info *info, int len)
 		free(*philo);
 		return (0);
 	}
-	add_values(len, philo, info);
-	//printf("Last meal vaut%d\n", (*philo)->last_meal);
+	if (!add_values(len, philo, new_thread, info))
+		return (0);
 	return (1);
 }

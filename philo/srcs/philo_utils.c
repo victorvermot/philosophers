@@ -12,6 +12,16 @@
 
 #include "../includes/philo.h"
 
+void	ft_clean(t_philo *philo, pthread_t *new_thread)
+{
+	int	i;
+
+	i = -1;
+	while (++i < philo->infos->philo_num)
+		pthread_mutex_destroy(&philo[i].fork);
+	ft_free(philo, new_thread, 2);
+}
+
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -24,14 +34,24 @@ int	ft_strlen(char *str)
 
 void	ft_write_msg(t_philo *philo, char *opt)
 {
-	gettimeofday(&philo->c_time, NULL);
+	size_t	time;
+
+	time = ft_get_time();
 	if (!philo->done_eating)
 	{
 		if (philo->id % 2 == 0)
-			printf("%d" YELLOW " %d %s\n"WHITE, philo->c_time.tv_usec, philo->id, opt);
+			printf("%ld" YELLOW " %d %s\n"WHITE, time, philo->id, opt);
 		else
-			printf("%d" RED " %d %s\n"WHITE, philo->c_time.tv_usec, philo->id, opt);
+			printf("%ld" RED " %d %s\n"WHITE, time, philo->id, opt);
 	}
+}
+
+size_t	ft_get_time(void)
+{
+	struct timeval	c_time;
+	
+	gettimeofday(&c_time, NULL);
+	return (c_time.tv_usec);
 }
 
 int	ft_atoi(const char *str)
