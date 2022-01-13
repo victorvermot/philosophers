@@ -71,7 +71,7 @@ void	ft_eat(t_philo *philo)
 	ft_write_msg(philo, FORK);
 	pthread_mutex_lock(&philo->right_philo->fork);
 	ft_write_msg(philo, FORK);
-	printf("le last meal %ld\n", ft_get_time() - philo->last_meal);
+	//printf("le last meal %ld\n", ft_get_time() - philo->last_meal);
 	if (ft_get_time() - philo->last_meal <= (size_t)philo->infos->time_to_die)
 	{
 		ft_write_msg(philo, EAT);

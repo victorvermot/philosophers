@@ -41,6 +41,7 @@ typedef struct s_info{
 	int	time_to_win;
 	int	philo_num;
 	int	is_printed;
+	size_t	init_time;
 	int	is_dead;
 }	t_info;
 

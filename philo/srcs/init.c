@@ -30,6 +30,7 @@ int	ft_args_check(t_info *info, char **argv, int opt)
 		return (0);
 	info->is_printed = 0;
 	info->is_dead = 0;
+	info->init_time = ft_get_time();
 	return (1);
 }
 
