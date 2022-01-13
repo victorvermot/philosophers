@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/10 10:46:21 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:27:55 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_info{
 	int				is_printed;
 	pthread_mutex_t	mutex_count;
 	pthread_mutex_t	mutex_print;
+	size_t			init_time;
 	int				is_dead;
 }	t_info;
 

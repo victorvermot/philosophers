@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 14:28:33 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/11 13:54:57 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:27:55 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ void	ft_eat(t_philo *philo)
 	ft_write_msg(philo, FORK);
 	pthread_mutex_lock(&philo->right_philo->fork);
 	ft_write_msg(philo, FORK);
-	//printf("last meal%ld de %d\n", ft_get_time() - philo->last_meal, philo->id);
-	//printf("isdead : %d\n", philo->infos->is_dead);
-	// printf("isprinted : %d\n", philo->infos->is_printed);
+	//printf("le last meal %ld\n", ft_get_time() - philo->last_meal);
 	if (ft_get_time() - philo->last_meal <= (size_t)philo->infos->time_to_die)
 	{
 		ft_write_msg(philo, EAT);

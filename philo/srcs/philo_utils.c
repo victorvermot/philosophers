@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 10:34:34 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/10 11:30:56 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:27:55 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ void	ft_write_msg(t_philo *philo, char *opt)
 {
 	size_t	time;
 
-	time = ft_get_time();
-	//printf("are u do")
+	time = ft_get_time() - philo->infos->init_time;
 	if (!philo->done_eating)
 	{
 		if (philo->id % 2 == 0)
@@ -53,9 +52,9 @@ void	ft_write_msg(t_philo *philo, char *opt)
 size_t	ft_get_time(void)
 {
 	struct timeval	c_time;
-	
+
 	gettimeofday(&c_time, NULL);
-	return (c_time.tv_usec);
+	return ((c_time.tv_sec * 1000) + (c_time.tv_usec / 1000));
 }
 
 int	ft_atoi(const char *str)

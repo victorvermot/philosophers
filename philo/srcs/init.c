@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:35:37 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/10 10:54:23 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:27:30 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_args_check(t_info *info, char **argv, int opt)
 		return (0);
 	info->is_printed = 0;
 	info->is_dead = 0;
+	info->init_time = ft_get_time();
 	return (1);
 }
 
