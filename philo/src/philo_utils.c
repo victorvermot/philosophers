@@ -6,11 +6,11 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 10:34:34 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/13 13:27:55 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:44:29 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
 int	ft_clean(t_philo *philo, pthread_t *new_thread)
 {

@@ -6,11 +6,11 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:14:01 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/10 11:24:06 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:44:32 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
 int	main(int argc, char **argv)
 {
@@ -22,10 +22,8 @@ int	main(int argc, char **argv)
 	philo = NULL;
 	if (argc != 5 && argc != 6)
 		return (0);
-	if (argc == 6)
-		ft_args_check(&info, argv, 1);
-	else
-		ft_args_check(&info, argv, 0);
+	if (ft_args_check(&info, argv, argc))
+		return (0);
 	len = ft_atoi(argv[1]);
 	if (len <= 0)
 		return (0);

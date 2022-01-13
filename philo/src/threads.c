@@ -6,11 +6,11 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 14:28:33 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/13 13:27:55 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:44:38 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
 int	ft_check_death(t_philo *philo)
 {

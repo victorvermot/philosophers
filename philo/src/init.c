@@ -6,13 +6,13 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:35:37 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/13 13:27:30 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/13 13:44:22 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../inc/philo.h"
 
-int	ft_args_check(t_info *info, char **argv, int opt)
+int	ft_args_check(t_info *info, char **argv, int argc)
 {
 	info->philo_num = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
@@ -21,7 +21,7 @@ int	ft_args_check(t_info *info, char **argv, int opt)
 	if (pthread_mutex_init(&info->mutex_count, NULL) != 0
 		|| pthread_mutex_init(&info->mutex_print, NULL) != 0)
 		return (0);
-	if (opt == 1)
+	if (argc == 6)
 	{
 		info->time_to_win = ft_atoi(argv[5]);
 		if (!info->time_to_win)
