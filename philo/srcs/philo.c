@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:14:01 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/07 10:36:29 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/10 11:24:06 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	main(int argc, char **argv)
 	if (!ft_allocate(&philo, &new_thread, &info, len))
 		return (0);
 	if (!ft_launch_thread(philo, len, new_thread))
-		return (0);
+		return (ft_clean(philo, new_thread));
+	if (!ft_check_death(philo->head))
+		return (ft_clean(philo, new_thread));
 	ft_clean(philo, new_thread);
 	return (0);
 }

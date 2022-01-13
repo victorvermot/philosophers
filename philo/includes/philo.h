@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/07 13:03:41 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/10 10:46:21 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@
 # define WHITE "\033[0m"
 
 typedef struct s_info{
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	time_to_win;
-	int	philo_num;
-	int	is_printed;
-	int	is_dead;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				time_to_win;
+	int				philo_num;
+	int				is_printed;
+	pthread_mutex_t	mutex_count;
+	pthread_mutex_t	mutex_print;
+	int				is_dead;
 }	t_info;
 
 typedef struct s_philo{
@@ -55,10 +57,11 @@ typedef struct s_philo{
 	t_info			*infos;
 }	t_philo;
 
+int		ft_check_death(t_philo *philo);
 int		ft_atoi(const char *str);
 void	ft_eat(t_philo *philo);
 size_t	ft_get_time(void);
-void	ft_clean(t_philo *philo, pthread_t *new_thread);
+int		ft_clean(t_philo *philo, pthread_t *new_thread);
 int		ft_args_check(t_info *info, char **argv, int opt);
 int		ft_allocate(t_philo **philo, pthread_t **new_thread,
 			t_info *info, int len);

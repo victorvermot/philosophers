@@ -6,46 +6,44 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 14:28:33 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/07 15:30:27 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/11 13:54:57 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-/* static int	ft_check_death(t_philo *philo)
+int	ft_check_death(t_philo *philo)
 {
 	int	i;
 	int	count;
-	pthread_mutex_t	mutex_count;
 
 	count = 0;
 	i = -1;
-	if (pthread_mutex_init(&mutex_count, NULL) != 0)
-		return (0);
 	while (++i < philo->infos->philo_num)
 	{
 		if (philo->infos->is_dead && !philo->infos->is_printed)
 		{
 			ft_write_msg(philo, DEATH);
+			printf("Did you die");
 			philo->infos->is_printed = 1;
-			return (0);
+			break ;
 		}
 		if (philo[i].done_eating)
 			count++;
 	}
-	pthread_mutex_lock(&mutex_count);
+	pthread_mutex_lock(&philo->infos->mutex_count);
 	if (count == philo->infos->philo_num && !philo->infos->is_printed)
 	{
 		printf("le printed : %d\n", philo->infos->is_printed);
 		if (!philo->infos->is_printed)
 			printf("Philosophers are done eating\n");
 		philo->infos->is_printed = 1;
+		pthread_mutex_unlock(&philo->infos->mutex_count);
 		return (0);
 	}
-	pthread_mutex_unlock(&mutex_count);
-	pthread_mutex_destroy(&mutex_count);
+	pthread_mutex_unlock(&philo->infos->mutex_count);
 	return (1);
-} */
+}
 
 static int	ft_are_philo_hungry(t_philo *philo)
 {
@@ -71,12 +69,16 @@ void	ft_eat(t_philo *philo)
 	ft_write_msg(philo, FORK);
 	pthread_mutex_lock(&philo->right_philo->fork);
 	ft_write_msg(philo, FORK);
-	printf("le last meal %ld\n", ft_get_time() - philo->last_meal);
+	//printf("last meal%ld de %d\n", ft_get_time() - philo->last_meal, philo->id);
+	//printf("isdead : %d\n", philo->infos->is_dead);
+	// printf("isprinted : %d\n", philo->infos->is_printed);
 	if (ft_get_time() - philo->last_meal <= (size_t)philo->infos->time_to_die)
 	{
 		ft_write_msg(philo, EAT);
 		usleep(philo->infos->time_to_eat);
+		pthread_mutex_lock(&philo->infos->mutex_count);
 		philo->meal_count += 1;
+		pthread_mutex_unlock(&philo->infos->mutex_count);
 		if (philo->infos->time_to_win)
 			ft_are_philo_hungry(philo);
 		philo->last_meal = ft_get_time();
@@ -84,6 +86,8 @@ void	ft_eat(t_philo *philo)
 	else
 	{
 		philo->infos->is_dead = 1;
+		pthread_mutex_unlock(&philo->right_philo->fork);
+		pthread_mutex_unlock(&philo->fork);
 		return ;
 	}
 	pthread_mutex_unlock(&philo->right_philo->fork);

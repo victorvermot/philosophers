@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:35:37 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/07 12:30:13 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/10 10:54:23 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	ft_args_check(t_info *info, char **argv, int opt)
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
 	info->time_to_sleep = ft_atoi(argv[4]);
+	if (pthread_mutex_init(&info->mutex_count, NULL) != 0
+		|| pthread_mutex_init(&info->mutex_print, NULL) != 0)
+		return (0);
 	if (opt == 1)
 	{
 		info->time_to_win = ft_atoi(argv[5]);
