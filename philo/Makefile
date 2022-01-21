@@ -1,4 +1,4 @@
-SRCS = ${addprefix srcs/, philo.c philo_utils.c init.c threads.c}
+SRCS = ${addprefix src/, philo.c philo_utils.c init.c threads.c}
 NAME = philo
 OBJS = ${SRCS:.c=.o}
 FLGS = -Wall -Wextra -Werror

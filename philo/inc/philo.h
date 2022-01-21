@@ -6,7 +6,7 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 15:36:21 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/13 13:27:55 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:33:03 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_info{
 	pthread_mutex_t	mutex_print;
 	size_t			init_time;
 	int				is_dead;
+	int				done_eating;
 }	t_info;
 
 typedef struct s_philo{
@@ -58,7 +59,6 @@ typedef struct s_philo{
 	t_info			*infos;
 }	t_philo;
 
-int		ft_check_death(t_philo *philo);
 int		ft_atoi(const char *str);
 void	ft_eat(t_philo *philo);
 size_t	ft_get_time(void);
@@ -68,6 +68,8 @@ int		ft_allocate(t_philo **philo, pthread_t **new_thread,
 			t_info *info, int len);
 int		ft_free(t_philo *philo, pthread_t *new_thread, int opt);
 void	ft_write_msg(t_philo *philo, char *opt);
-int		ft_launch_thread(t_philo *philo, int len, pthread_t *new_thread);
+int		ft_launch_thread(t_philo *philo, int philo_num, pthread_t *new_thread);
+void	hold_door(t_philo *philo);
+void	ft_usleep_enhanced(t_philo *philo, size_t time);
 
 #endif

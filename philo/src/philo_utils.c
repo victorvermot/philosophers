@@ -6,24 +6,11 @@
 /*   By: vvermot- <vvermot-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 10:34:34 by vvermot-          #+#    #+#             */
-/*   Updated: 2022/01/13 13:44:29 by vvermot-         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:32:59 by vvermot-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
-
-int	ft_clean(t_philo *philo, pthread_t *new_thread)
-{
-	int	i;
-
-	i = -1;
-	while (++i < philo->infos->philo_num)
-		pthread_mutex_destroy(&philo[i].fork);
-	pthread_mutex_destroy(&philo->infos->mutex_count);
-	// pthread_mutex_destroy(&philo->infos->mutex_print);
-	ft_free(philo, new_thread, 2);
-	return (0);
-}
 
 int	ft_strlen(char *str)
 {
@@ -55,6 +42,19 @@ size_t	ft_get_time(void)
 
 	gettimeofday(&c_time, NULL);
 	return ((c_time.tv_sec * 1000) + (c_time.tv_usec / 1000));
+}
+
+void	ft_usleep_enhanced(t_philo *philo, size_t time)
+{
+	size_t	t;
+
+	t = ft_get_time();
+	while (!philo->infos->is_dead)
+	{
+		if ((ft_get_time() - t) >= time)
+			break ;
+		usleep(100);
+	}
 }
 
 int	ft_atoi(const char *str)
