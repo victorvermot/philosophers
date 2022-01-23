@@ -37,5 +37,7 @@ While multithreading programmation is useful in [many situations](https://totalv
 1. ### Data races <a name="races"></a>
 [Data races](https://www.modernescpp.com/index.php/race-condition-versus-data-race): A data race is a situation, in which at least two threads access a shared variable at the same time. At least one thread tries to modify the variable. Some operations refered to as **atomic**, are free of data races risks, as they cannot happen at the same time (the mutex are an example of atomic operation). The way to avoid facing this issue is using mutex.
 
+Data races should not be confused with **race conditions**. Although the name is similar, their are indeed different. A [race condition](https://blog.regehr.org/archives/490) A race condition is a flaw that occurs when the timing or ordering of events affects a program’s correctness. Generally speaking, some kind of external timing or ordering non-determinism is needed to produce a race condition; typical examples are context switches, OS signals, memory operations on a multiprocessor, and hardware interrupts.
+
 2. ### Deadlocks <a name="dead"></a>
 A deadlock is an issue that can happen when using mutex. A deadlock hapens if the current thread is waiting for another to unlock its mutex, while this other thread is waiting for the current thread to unlock its mutex to proceed. This leads the program to be stuck in a neverending loop. The way to fix it is to manipulate the code in order to never face the problem (use usleep() to make threads lock at different times).
